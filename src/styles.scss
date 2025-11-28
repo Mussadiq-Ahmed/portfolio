@@ -1,0 +1,93 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* Rich Material theme with elegant colors - Angular 18+ */
+$primary: mat.m2-define-palette(mat.$m2-deep-purple-palette, 700);
+$accent: mat.m2-define-palette(mat.$m2-amber-palette, A400);
+
+$theme: mat.m2-define-dark-theme((
+  color: (primary: $primary, accent: $accent),
+  typography: mat.m2-define-typography-config(
+    $font-family: 'Poppins, Inter, Roboto, sans-serif'
+  )
+));
+
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 50%, #ffffff 100%);
+  background-attachment: fixed;
+  color: #2c3e50;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(44, 62, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(52, 73, 94, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+main.container {
+  padding: 32px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 0;
+  border-radius: 16px;
+}
+
+.profile-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.mat-mdc-card {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  background: linear-gradient(135deg, rgba(26, 32, 53, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0.3px !important;
+}
+
+.mat-mdc-outlined-button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  border-width: 2px !important;
+}
+
+@media (max-width: 780px) {
+  .hero { flex-direction: column; align-items: flex-start }
+  main.container { padding: 12px }
+}
+
+.fade-in { animation: fadeIn 450ms ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+
+/* Material theme include - Angular 18+ */
+@include mat.all-component-themes($theme);

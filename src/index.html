@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Musadiq Ahmed - Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      /* Disable text selection and context menu on sensitive content */
+      img, iframe {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <app-root></app-root>
+    <script>
+      document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'IFRAME') {
+          e.preventDefault();
+        }
+      });
+      
+      document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+          e.preventDefault();
+        }
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault();
+        }
+      });
+    </script>
+    <script>
+      (function(){
+        function show(msg){
+          try{
+            var el = document.getElementById('runtime-error-overlay');
+            if(!el){
+              el = document.createElement('div');
+              el.id = 'runtime-error-overlay';
+              Object.assign(el.style,{position:'fixed',left:0,right:0,bottom:0,top:0,zIndex:999999,background:'rgba(0,0,0,0.85)',color:'#fff',padding:'18px',fontSize:'13px',overflow:'auto',fontFamily:'monospace'});
+              document.documentElement.appendChild(el);
+            }
+            el.innerText = 'Runtime error — check console for stack and details:\n\n' + msg;
+          }catch(e){console.error('overlay error',e)}
+        }
+
+        window.addEventListener('error', function(ev){
+          var text = (ev && ev.message ? ev.message : (ev && ev.error && ev.error.message) || String(ev));
+          show(text + '\n\n' + (ev && ev.error && ev.error.stack ? ev.error.stack : 'no stack available'));
+        });
+        window.addEventListener('unhandledrejection', function(ev){
+          var reason = ev && ev.reason ? ev.reason : ev;
+          var msg = typeof reason === 'string' ? reason : (reason && reason.message) || JSON.stringify(reason);
+          show('Unhandled Rejection: ' + msg + '\n\n' + (reason && reason.stack ? reason.stack : 'no stack available'));
+        });
+      })();
+    </script>
+  </body>
+</html>
