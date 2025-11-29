@@ -77,21 +77,31 @@ export class ResumeComponent {
 
   async downloadResume() {
     try {
-      const response = await fetch('assets/Musadiq_Ahmed Resume.pdf');
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Musadiq_Ahmed_Resume.pdf';
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
+      // For Safari iOS, we need to use a different approach
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
-      // Clean up
-      setTimeout(() => {
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      }, 100);
+      if (isSafari || isIOS) {
+        // Safari approach: open in new window with proper download header
+        window.open('assets/Musadiq_Ahmed Resume.pdf', '_blank');
+      } else {
+        // Chrome/Firefox approach: use blob
+        const response = await fetch('assets/Musadiq_Ahmed Resume.pdf');
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Musadiq_Ahmed_Resume.pdf';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Clean up
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+      }
     } catch (error) {
       console.error('Download failed:', error);
       // Fallback: open in new tab
