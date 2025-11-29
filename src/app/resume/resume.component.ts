@@ -75,13 +75,27 @@ export class ResumeComponent {
     this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/Musadiq_Ahmed Resume.pdf#toolbar=0&navpanes=0&scrollbar=1');
   }
 
-  downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/Musadiq_Ahmed Resume.pdf';
-    link.download = 'Musadiq_Ahmed_Resume.pdf';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  async downloadResume() {
+    try {
+      const response = await fetch('assets/Musadiq_Ahmed Resume.pdf');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Musadiq_Ahmed_Resume.pdf';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback: open in new tab
+      window.open('assets/Musadiq_Ahmed Resume.pdf', '_blank');
+    }
   }
 }
