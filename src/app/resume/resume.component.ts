@@ -77,15 +77,24 @@ export class ResumeComponent {
 
   async downloadResume() {
     try {
-      // For Safari iOS, we need to use a different approach
+      // Detect Safari/iOS
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
       if (isSafari || isIOS) {
-        // Safari approach: open in new window with proper download header
-        window.open('assets/Musadiq_Ahmed Resume.pdf', '_blank');
+        // Redirect Safari users to Chrome with the PDF link
+        const pdfUrl = window.location.origin + '/assets/Musadiq_Ahmed Resume.pdf';
+        const chromeIntent = `googlechrome://${window.location.host}/resume`;
+        
+        // Try to open in Chrome app (iOS)
+        window.location.href = chromeIntent;
+        
+        // Fallback after a short delay if Chrome didn't open
+        setTimeout(() => {
+          window.open(pdfUrl, '_blank');
+        }, 1500);
       } else {
-        // Chrome/Firefox approach: use blob
+        // Chrome/Firefox approach: use blob for direct download
         const response = await fetch('assets/Musadiq_Ahmed Resume.pdf');
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -104,7 +113,6 @@ export class ResumeComponent {
       }
     } catch (error) {
       console.error('Download failed:', error);
-      // Fallback: open in new tab
       window.open('assets/Musadiq_Ahmed Resume.pdf', '_blank');
     }
   }
