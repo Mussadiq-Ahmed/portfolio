@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
       <div style="max-width:900px; text-align:center; width:100%;">
         <div style="margin-bottom:clamp(24px, 4vw, 32px); position:relative; display:inline-block;">
           <div class="profile-bg"></div>
-          <img src="/assets/Musadiq_Ahmed.jpg" alt="Musadiq Ahmed" class="profile-img" />
+          <img src="assets/Musadiq_Ahmed.JPEG" alt="Musadiq Ahmed" class="profile-img" />
         </div>
 
         <h1 class="name-title">Musadiq Ahmed</h1>
@@ -25,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
             Software Engineer with 5+ years of experience building scalable backend systems and cloud-native applications for real-world customer solutions.
           </p>
           <p class="description-text">
-            Currently working as Software Engineer and contributing to high-impact applications using Java, Kotlin, Python, and JavaScript with REST and GraphQL APIs.
+            Currently contributing to high-impact applications using Java, Kotlin, Python, and JavaScript with REST and GraphQL APIs.
           </p>
           <p class="description-text">
             Experienced in designing features, optimizing performance, and deploying reliable systems on AWS with CI/CD, centralized logging, and monitoring. Thrive in fast-paced engineering environments with strong ownership and impact. Passionate about delivering production-ready solutions, enhancing user experience, and continuously learning new technologies.
@@ -68,8 +68,9 @@ import { MatIconModule } from '@angular/material/icon';
     /* Profile Picture Styles */
     .profile-bg {
       position: absolute;
-      top: -15px;
-      left: -15px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: clamp(180px, 25vw, 220px);
       height: clamp(180px, 25vw, 220px);
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -91,6 +92,7 @@ import { MatIconModule } from '@angular/material/icon';
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      display: block;
     }
 
     /* Typography */
@@ -125,7 +127,13 @@ import { MatIconModule } from '@angular/material/icon';
       line-height: 1.8;
       font-size: clamp(0.9rem, 2vw, 1.05rem);
       font-weight: 300;
-      text-align: left;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .description-text {
+        text-align: left;
+      }
     }
 
     /* Social Icons */

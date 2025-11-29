@@ -14,12 +14,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
       <div style="text-align:center; margin-bottom:40px; animation: fadeInDown 0.6s ease-out;">
         <h1 style="margin:0 0 12px 0; font-size:2.5rem; font-weight:400; color:#2c3e50; letter-spacing:-0.5px;">My Curriculum Vitae</h1>
         <p style="margin:0 0 24px; color:#2c3e50; opacity:0.7; font-size:1.05rem;">A comprehensive overview of my professional experience and skills</p>
-        <a mat-raised-button href="/assets/Musadiq_Ahmed Resume.pdf" download="Musadiq_Ahmed_Resume.pdf" 
-           (contextmenu)="$event.preventDefault()"
+        <button mat-raised-button (click)="downloadResume()" 
            style="background:#2c3e50; color:white; font-weight:500; padding:12px 36px; font-size:0.95rem; text-transform:uppercase; letter-spacing:1.2px; box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);">
           <mat-icon style="margin-right:8px; vertical-align:middle;">download</mat-icon>
           Download CV
-        </a>
+        </button>
       </div>
 
       <div style="animation: fadeInUp 0.8s ease-out;">
@@ -74,5 +73,15 @@ export class ResumeComponent {
   
   constructor(private sanitizer: DomSanitizer) {
     this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/Musadiq_Ahmed Resume.pdf#toolbar=0&navpanes=0&scrollbar=1');
+  }
+
+  downloadResume() {
+    const link = document.createElement('a');
+    link.href = 'assets/Musadiq_Ahmed Resume.pdf';
+    link.download = 'Musadiq_Ahmed_Resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }

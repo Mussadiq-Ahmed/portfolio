@@ -40,7 +40,7 @@ export class SkillsComponent {
     },
     {
       name: 'DevOps & Cloud',
-      skills: ['AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Cloud Foundry', 'Concourse', 'Kibana']
+      skills: ['AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Cloud Foundry', 'Concourse', 'Kibana', 'Kafka', 'Kinesis']
     },
     {
       name: 'Languages',
