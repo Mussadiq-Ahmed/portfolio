@@ -72,7 +72,7 @@ export class ResumeComponent {
   pdfUrl: SafeResourceUrl;
   
   constructor(private sanitizer: DomSanitizer) {
-    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/Musadiq_Ahmed Resume.pdf#toolbar=0&navpanes=0&scrollbar=1');
+    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/Musadiq_Ahmed_CV.pdf#toolbar=0&navpanes=0&scrollbar=1');
   }
 
   async downloadResume() {
@@ -83,7 +83,7 @@ export class ResumeComponent {
       
       if (isSafari || isIOS) {
         // Redirect Safari users to Chrome with the PDF link
-        const pdfUrl = window.location.origin + '/assets/Musadiq_Ahmed Resume.pdf';
+        const pdfUrl = window.location.origin + '/assets/Musadiq_Ahmed_CV.pdf';
         const chromeIntent = `googlechrome://${window.location.host}/resume`;
         
         // Try to open in Chrome app (iOS)
@@ -95,12 +95,12 @@ export class ResumeComponent {
         }, 1500);
       } else {
         // Chrome/Firefox approach: use blob for direct download
-        const response = await fetch('assets/Musadiq_Ahmed Resume.pdf');
+        const response = await fetch('assets/Musadiq_Ahmed_CV.pdf');
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'Musadiq_Ahmed_Resume.pdf';
+        link.download = 'Musadiq_Ahmed_CV.pdf';
         link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
@@ -113,7 +113,7 @@ export class ResumeComponent {
       }
     } catch (error) {
       console.error('Download failed:', error);
-      window.open('assets/Musadiq_Ahmed Resume.pdf', '_blank');
+      window.open('assets/Musadiq_Ahmed_CV.pdf', '_blank');
     }
   }
 }

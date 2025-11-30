@@ -43,6 +43,10 @@ export class SkillsComponent {
       skills: ['AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Cloud Foundry', 'Concourse', 'Kibana', 'Kafka', 'Kinesis']
     },
     {
+      name: 'Databases',
+      skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'DynamoDB']
+    },
+    {
       name: 'Languages',
       skills: ['English', 'Hindi', 'Kannada']
     }
